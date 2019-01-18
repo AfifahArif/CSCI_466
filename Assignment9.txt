@@ -77,29 +77,29 @@ MariaDB [(none)]> SHOW databases;
 | classicmodels      |
 | henrybooks         |
 | information_schema |
-| z1791755           |
+| XXXXXXXX           |
 +--------------------+
 65 rows in set (0.08 sec)
 
-MariaDB [(none)]> USE z1791755;
+MariaDB [(none)]> USE XXXXXXXX;
 Database changed
 
-MariaDB [z1791755]> CREATE table Fall(
+MariaDB [XXXXXXXX]> CREATE table Fall(
     -> pk int primary key,
     -> data char(15));
 Query OK, 0 rows affected (0.35 sec)
 
-MariaDB [z1791755]> start transaction;
+MariaDB [XXXXXXXX]> start transaction;
 Query OK, 0 rows affected (0.00 sec)
 
-MariaDB [z1791755]> insert into Fall
+MariaDB [XXXXXXXX]> insert into Fall
     -> values(1, 'dataA');
 Query OK, 1 row affected (0.00 sec)
 
-MariaDB [z1791755]> insert into Fall  values(2, 'dataB');
+MariaDB [XXXXXXXX]> insert into Fall  values(2, 'dataB');
 Query OK, 1 row affected (0.00 sec)
 
-MariaDB [z1791755]> insert into Fall  values(3, 'dataC');
+MariaDB [XXXXXXXX]> insert into Fall  values(3, 'dataC');
 Query OK, 1 row affected (0.00 sec)
 
 2) Start your secod MySQL session, issue the following MySQL statements:
@@ -107,10 +107,10 @@ Query OK, 1 row affected (0.00 sec)
 MariaDB [(none)]> \T Assgn9out.txt
 Logging to file 'Assgn9out.txt'
 
-MariaDB [(none)]> use z1791755;
+MariaDB [(none)]> use XXXXXXXX;
 Database changed
 
-MariaDB [z1791755]> select * from Fall;
+MariaDB [XXXXXXXX]> select * from Fall;
 Empty set (0.00 sec)
 
 What is result of the select statement, and why?
@@ -119,18 +119,18 @@ What is result of the select statement, and why?
 	
 3) Then in the same session
 
-MariaDB [z1791755]> insert into Fall values(4, 'dataD');
+MariaDB [XXXXXXXX]> insert into Fall values(4, 'dataD');
 Query OK, 1 row affected (0.04 sec)
 
-MariaDB [z1791755]> insert into Fall values(5, 'dataE');
+MariaDB [XXXXXXXX]> insert into Fall values(5, 'dataE');
 Query OK, 1 row affected (0.04 sec)
 
 4) Switch back to your first MySQL sesssion, issue following MySQL statement:
 
-MariaDB [z1791755]> commit;
+MariaDB [XXXXXXXX]> commit;
 Query OK, 0 rows affected (0.04 sec)
 
-MariaDB [z1791755]> select * from Fall;
+MariaDB [XXXXXXXX]> select * from Fall;
 +----+-------+
 | pk | data  |
 +----+-------+
@@ -142,13 +142,13 @@ MariaDB [z1791755]> select * from Fall;
 +----+-------+
 5 rows in set (0.00 sec)
 
-MariaDB [z1791755]> \t
+MariaDB [XXXXXXXX]> \t
 Outfile disabled.
-MariaDB [z1791755]> exit;
+MariaDB [XXXXXXXX]> exit;
 
 5) Switch back to your second MySQL session, issue following MySQL statements:
 
-MariaDB [z1791755]> select * from Fall;
+MariaDB [XXXXXXXX]> select * from Fall;
 +----+-------+
 | pk | data  |
 +----+-------+
@@ -160,11 +160,11 @@ MariaDB [z1791755]> select * from Fall;
 +----+-------+
 5 rows in set (0.00 sec)
 
-MariaDB [z1791755]> \t
+MariaDB [XXXXXXXX]> \t
 Outfile disabled.
-MariaDB [z1791755]> exit;
+MariaDB [XXXXXXXX]> exit;
 
-What is result of the select statement, and why?
+What is the result of the select statement, and why?
 	All 5 rows are shown because we executed commit in the first session.
 	
 
@@ -175,16 +175,16 @@ Part II: Power of Rollback
 MariaDB [(none)]> \T Assgn9out.txt
 Logging to file 'Assgn9out.txt'
 
-MariaDB [(none)]> use z1791755;
+MariaDB [(none)]> use XXXXXXXX;
 Database changed
 
-MariaDB [z1791755]> start transaction;
+MariaDB [XXXXXXXX]> start transaction;
 Query OK, 0 rows affected (0.00 sec)
 
-MariaDB [z1791755]> delete from Fall where pk =3;
+MariaDB [XXXXXXXX]> delete from Fall where pk =3;
 Query OK, 1 row affected (0.00 sec)
 
-MariaDB [z1791755]> select * from Fall;
+MariaDB [XXXXXXXX]> select * from Fall;
 +----+-------+
 | pk | data  |
 +----+-------+
@@ -197,33 +197,33 @@ MariaDB [z1791755]> select * from Fall;
 
 2) Then
 
-MariaDB [z1791755]> Update Fall set data = 'changed' where pk=2;
+MariaDB [XXXXXXXX]> Update Fall set data = 'changed' where pk=2;
 Query OK, 1 row affected (0.00 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
 3) Then
 
-MariaDB [z1791755]> Update Fall set data = 'changed 2' where pk=4;
+MariaDB [XXXXXXXX]> Update Fall set data = 'changed 2' where pk=4;
 Query OK, 0 rows affected (0.00 sec)
 Rows matched: 0  Changed: 0  Warnings: 0
 
 4) Then
 
-MariaDB [z1791755]> insert into Fall values(6, 'dataF');
+MariaDB [XXXXXXXX]> insert into Fall values(6, 'dataF');
 Query OK, 1 row affected (0.00 sec)
 
-MariaDB [z1791755]> select * from Spring;
-ERROR 1146 (42S02): Table 'z1791755.Spring' doesn't exist
+MariaDB [XXXXXXXX]> select * from Spring;
+ERROR 1146 (42S02): Table 'XXXXXXXX.Spring' doesn't exist
 
 What is result of the select statement, and why?
 	The table doesn't exist because it was never created. 
 
 5) Issue the following MySQL statements:
 
-MariaDB [z1791755]> rollback;
+MariaDB [XXXXXXXX]> rollback;
 Query OK, 0 rows affected (0.08 sec)
 
-MariaDB [z1791755]> select * from Fall;
+MariaDB [XXXXXXXX]> select * from Fall;
 +----+-------+
 | pk | data  |
 +----+-------+
@@ -239,9 +239,9 @@ MariaDB [z1791755]> select * from Fall;
 What is result of the select statement, and why?
 	All of the items inserted show up because the rollback undoes any previous changes.
 
-MariaDB [z1791755]> \t
+MariaDB [XXXXXXXX]> \t
 Outfile disabled.
-MariaDB [z1791755]> exit;
+MariaDB [XXXXXXXX]> exit;
 
 
 Part III: Be Aware of Deadlock
@@ -250,48 +250,43 @@ SESSION 1
 MariaDB [(none)]> \T Assgn9out.txt
 Logging to file 'Assgn9out.txt'
 
-MariaDB [(none)]> use z1791755;
+MariaDB [(none)]> use XXXXXXXX;
 Database changed
 
-MariaDB [z1791755]> start transaction;
+MariaDB [XXXXXXXX]> start transaction;
 Query OK, 0 rows affected (0.00 sec)
 
-MariaDB [z1791755]> update Fall
+MariaDB [XXXXXXXX]> update Fall
     -> set data = 'data1A'
     -> where pk =1;
 Query OK, 1 row affected (0.00 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
-MariaDB [z1791755]> update Fall set
+MariaDB [XXXXXXXX]> update Fall set
     -> data = 'data5E'
     -> where pk =5;
 Query OK, 1 row affected (0.00 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
-MariaDB [z1791755]>\t
-MariaDB [z1791755]>exit;
+MariaDB [XXXXXXXX]>\t
+MariaDB [XXXXXXXX]>exit;
 
 SESSION 2
 MariaDB [(none)]> \T Assgn9out.txt
 Logging to file 'Assgn9out.txt'
 
-MariaDB [(none)]> use z1791755;
+MariaDB [(none)]> use XXXXXXXX;
 Database changed
 
-MariaDB [z1791755]> start transaction;
+MariaDB [XXXXXXXX]> start transaction;
 Query OK, 0 rows affected (0.00 sec)
 
-MariaDB [z1791755]> update Fall set data = 'data2B' where pk=2;
+MariaDB [XXXXXXXX]> update Fall set data = 'data2B' where pk=2;
 Query OK, 1 row affected (0.00 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
-MariaDB [z1791755]> update Fall set data = 'data12B' where pk=1;
+MariaDB [XXXXXXXX]> update Fall set data = 'data12B' where pk=1;
 ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction
 
-MariaDB [z1791755]>\T
-MariaDB [z1791755]>exit;
-
-
-
-
-
+MariaDB [XXXXXXXX]>\T
+MariaDB [XXXXXXXX]>exit
