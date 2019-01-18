@@ -1,0 +1,3 @@
+#!/bin/bash
+# Start mariaDB with my login info and prompt for password
+mysql -u XXXXXXXX -h courses -p
