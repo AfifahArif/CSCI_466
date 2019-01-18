@@ -1,0 +1,297 @@
+Afifah Arif
+Assignment 9 - Transactions
+Due Date: 11/18/2018
+
+Part I: Power of Commit
+
+1) Start your first MySQL session, issue the following MySQL statements setting the output file:
+
+MariaDB [(none)]> \T Assgn9out.txt
+Logging to file 'Assgn9out.txt'
+
+MariaDB [(none)]> SHOW databases;
++--------------------+
+| Database           |
++--------------------+
+| BabyName           |
+| JavaCust07         |
+| JavaCust08         |
+| JavaCust09         |
+| JavaCust10         |
+| JavaCust11         |
+| JavaCust12         |
+| JavaCust13         |
+| JavaCust14         |
+| JavaCust15         |
+| JavaCust16         |
+| JavaCust17         |
+| JavaCust18         |
+| JavaCust19         |
+| JavaCust20         |
+| JavaCust21         |
+| JavaCust22         |
+| JavaCust23         |
+| JavaCust24         |
+| JavaCust25         |
+| JavaCust26         |
+| JavaCust27         |
+| JavaCust28         |
+| JavaCust29         |
+| JavaCust30         |
+| JavaCust31         |
+| JavaCust32         |
+| JavaCust33         |
+| JavaCust34         |
+| JavaCust35         |
+| JavaCust36         |
+| JavaCust37         |
+| JavaCust38         |
+| JavaCust39         |
+| JavaCust40         |
+| JavaCust41         |
+| JavaCust42         |
+| JavaCust43         |
+| JavaCust44         |
+| JavaCust45         |
+| JavaCust46         |
+| JavaCust47         |
+| JavaCust48         |
+| JavaCust49         |
+| JavaCust50         |
+| JavaCust51         |
+| JavaCust52         |
+| JavaCust53         |
+| JavaCust54         |
+| JavaCust55         |
+| JavaCust56         |
+| JavaCust57         |
+| JavaCust58         |
+| JavaCust59         |
+| JavaCust60         |
+| JavaCust61         |
+| JavaCust62         |
+| JavaCust63         |
+| JavaCust64         |
+| JavaCust65         |
+| Premiere           |
+| classicmodels      |
+| henrybooks         |
+| information_schema |
+| z1791755           |
++--------------------+
+65 rows in set (0.08 sec)
+
+MariaDB [(none)]> USE z1791755;
+Database changed
+
+MariaDB [z1791755]> CREATE table Fall(
+    -> pk int primary key,
+    -> data char(15));
+Query OK, 0 rows affected (0.35 sec)
+
+MariaDB [z1791755]> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [z1791755]> insert into Fall
+    -> values(1, 'dataA');
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [z1791755]> insert into Fall  values(2, 'dataB');
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [z1791755]> insert into Fall  values(3, 'dataC');
+Query OK, 1 row affected (0.00 sec)
+
+2) Start your secod MySQL session, issue the following MySQL statements:
+
+MariaDB [(none)]> \T Assgn9out.txt
+Logging to file 'Assgn9out.txt'
+
+MariaDB [(none)]> use z1791755;
+Database changed
+
+MariaDB [z1791755]> select * from Fall;
+Empty set (0.00 sec)
+
+What is result of the select statement, and why?
+	The result is empty because nothing can be shown until the commit command is entered
+	or until session 2 is reconnected.
+	
+3) Then in the same session
+
+MariaDB [z1791755]> insert into Fall values(4, 'dataD');
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [z1791755]> insert into Fall values(5, 'dataE');
+Query OK, 1 row affected (0.04 sec)
+
+4) Switch back to your first MySQL sesssion, issue following MySQL statement:
+
+MariaDB [z1791755]> commit;
+Query OK, 0 rows affected (0.04 sec)
+
+MariaDB [z1791755]> select * from Fall;
++----+-------+
+| pk | data  |
++----+-------+
+|  1 | dataA |
+|  2 | dataB |
+|  3 | dataC |
+|  4 | dataD |
+|  5 | dataE |
++----+-------+
+5 rows in set (0.00 sec)
+
+MariaDB [z1791755]> \t
+Outfile disabled.
+MariaDB [z1791755]> exit;
+
+5) Switch back to your second MySQL session, issue following MySQL statements:
+
+MariaDB [z1791755]> select * from Fall;
++----+-------+
+| pk | data  |
++----+-------+
+|  1 | dataA |
+|  2 | dataB |
+|  3 | dataC |
+|  4 | dataD |
+|  5 | dataE |
++----+-------+
+5 rows in set (0.00 sec)
+
+MariaDB [z1791755]> \t
+Outfile disabled.
+MariaDB [z1791755]> exit;
+
+What is result of the select statement, and why?
+	All 5 rows are shown because we executed commit in the first session.
+	
+
+Part II: Power of Rollback
+
+1) Start another MySQL session, issue following MySQL statements:
+
+MariaDB [(none)]> \T Assgn9out.txt
+Logging to file 'Assgn9out.txt'
+
+MariaDB [(none)]> use z1791755;
+Database changed
+
+MariaDB [z1791755]> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [z1791755]> delete from Fall where pk =3;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [z1791755]> select * from Fall;
++----+-------+
+| pk | data  |
++----+-------+
+|  1 | dataA |
+|  2 | dataB |
+|  4 | dataD |
+|  5 | dataE |
++----+-------+
+4 rows in set (0.00 sec)
+
+2) Then
+
+MariaDB [z1791755]> Update Fall set data = 'changed' where pk=2;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+3) Then
+
+MariaDB [z1791755]> Update Fall set data = 'changed 2' where pk=4;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+4) Then
+
+MariaDB [z1791755]> insert into Fall values(6, 'dataF');
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [z1791755]> select * from Spring;
+ERROR 1146 (42S02): Table 'z1791755.Spring' doesn't exist
+
+What is result of the select statement, and why?
+	The table doesn't exist because it was never created. 
+
+5) Issue the following MySQL statements:
+
+MariaDB [z1791755]> rollback;
+Query OK, 0 rows affected (0.08 sec)
+
+MariaDB [z1791755]> select * from Fall;
++----+-------+
+| pk | data  |
++----+-------+
+|  1 | dataA |
+|  2 | dataB |
+|  3 | dataC |
+|  4 | dataD |
+|  5 | dataE |
+|  6 | DataF |
++----+-------+
+5 rows in set (0.00 sec)
+
+What is result of the select statement, and why?
+	All of the items inserted show up because the rollback undoes any previous changes.
+
+MariaDB [z1791755]> \t
+Outfile disabled.
+MariaDB [z1791755]> exit;
+
+
+Part III: Be Aware of Deadlock
+
+SESSION 1
+MariaDB [(none)]> \T Assgn9out.txt
+Logging to file 'Assgn9out.txt'
+
+MariaDB [(none)]> use z1791755;
+Database changed
+
+MariaDB [z1791755]> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [z1791755]> update Fall
+    -> set data = 'data1A'
+    -> where pk =1;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [z1791755]> update Fall set
+    -> data = 'data5E'
+    -> where pk =5;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [z1791755]>\t
+MariaDB [z1791755]>exit;
+
+SESSION 2
+MariaDB [(none)]> \T Assgn9out.txt
+Logging to file 'Assgn9out.txt'
+
+MariaDB [(none)]> use z1791755;
+Database changed
+
+MariaDB [z1791755]> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [z1791755]> update Fall set data = 'data2B' where pk=2;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [z1791755]> update Fall set data = 'data12B' where pk=1;
+ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction
+
+MariaDB [z1791755]>\T
+MariaDB [z1791755]>exit;
+
+
+
+
+
