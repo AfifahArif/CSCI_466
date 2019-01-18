@@ -1,5 +1,5 @@
-login as: z1791755
-z1791755@turing.cs.niu.edu's password:
+login as: XXXXXXXX
+XXXXXXXX@turing.cs.niu.edu's password:
 Linux turing 4.9.0-7-amd64 #1 SMP Debian 4.9.110-3+deb9u1 (2018-08-03) x86_64
 
 The programs included with the Debian GNU/Linux system are free software;
@@ -11,7 +11,7 @@ permitted by applicable law.
 You have mail.
 Last login: Thu Nov  1 21:08:05 2018 from 10.167.24.182
 
-z1791755@turing:~$ mysql -u z1791755 -h courses -p
+XXXXXXXX@turing:~$ mysql -u XXXXXXXX -h courses -p
 Enter password:
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
 Your MariaDB connection id is 36431
@@ -92,35 +92,35 @@ MariaDB [(none)]> SHOW databases;
 | henrybooks         |
 | information_schema |
 | test               |
-| z1791755           |
+| XXXXXXXX           |
 +--------------------+
 66 rows in set (0.08 sec)
 
-MariaDB [(none)]> USE z1791755;
+MariaDB [(none)]> USE XXXXXXXX;
 Database changed
-MariaDB [z1791755]> CREATE TABLE dogs(
+MariaDB [XXXXXXXX]> CREATE TABLE dogs(
     -> dog_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     -> breed VARCHAR(30),
     -> name VARCHAR(30)
     -> );
 Query OK, 0 rows affected (0.89 sec)
 
-MariaDB [z1791755]> INSERT INTO dogs(breed, name) VALUES('bulldog', 'allen');
+MariaDB [XXXXXXXX]> INSERT INTO dogs(breed, name) VALUES('bulldog', 'allen');
 Query OK, 1 row affected (0.12 sec)
 
-MariaDB [z1791755]> INSERT INTO dogs(breed, name) VALUES('beagle', 'craig');
+MariaDB [XXXXXXXX]> INSERT INTO dogs(breed, name) VALUES('beagle', 'craig');
 Query OK, 1 row affected (0.04 sec)
 
-MariaDB [z1791755]> INSERT INTO dogs(breed, name) VALUES('poodle', 'edna');
+MariaDB [XXXXXXXX]> INSERT INTO dogs(breed, name) VALUES('poodle', 'edna');
 Query OK, 1 row affected (0.14 sec)
 
-MariaDB [z1791755]> INSERT INTO dogs(breed, name) VALUES('pug', 'lucy');
+MariaDB [XXXXXXXX]> INSERT INTO dogs(breed, name) VALUES('pug', 'lucy');
 Query OK, 1 row affected (0.16 sec)
 
-MariaDB [z1791755]> INSERT INTO dogs(breed, name) VALUES('chihuahua', 'eugene');
+MariaDB [XXXXXXXX]> INSERT INTO dogs(breed, name) VALUES('chihuahua', 'eugene');
 Query OK, 1 row affected (0.18 sec)
 
-MariaDB [z1791755]> SELECT * FROM dogs;
+MariaDB [XXXXXXXX]> SELECT * FROM dogs;
 +--------+-----------+--------+
 | dog_id | breed     | name   |
 +--------+-----------+--------+
@@ -132,7 +132,7 @@ MariaDB [z1791755]> SELECT * FROM dogs;
 +--------+-----------+--------+
 5 rows in set (0.01 sec)
 
-MariaDB [z1791755]> CREATE TABLE visits(
+MariaDB [XXXXXXXX]> CREATE TABLE visits(
     -> visit_id INT NOT NULL AUTO_INCREMENT,
     -> dog_id INT,
     -> date DATE,
@@ -141,31 +141,31 @@ MariaDB [z1791755]> CREATE TABLE visits(
     -> );
 Query OK, 0 rows affected (0.89 sec)
 
-MariaDB [z1791755]> INSERT INTO visits(dog_id, date) VALUES(1, CURDATE());
+MariaDB [XXXXXXXX]> INSERT INTO visits(dog_id, date) VALUES(1, CURDATE());
 Query OK, 1 row affected (0.17 sec)
 
-MariaDB [z1791755]> INSERT INTO visits(dog_id, date) VALUES(2, CURDATE());
+MariaDB [XXXXXXXX]> INSERT INTO visits(dog_id, date) VALUES(2, CURDATE());
 Query OK, 1 row affected (0.30 sec)
 
-MariaDB [z1791755]> INSERT INTO visits(dog_id, date) VALUES(3, CURDATE());
+MariaDB [XXXXXXXX]> INSERT INTO visits(dog_id, date) VALUES(3, CURDATE());
 Query OK, 1 row affected (0.18 sec)
 
-MariaDB [z1791755]> INSERT INTO visits(dog_id, date) VALUES(4, CURDATE());
+MariaDB [XXXXXXXX]> INSERT INTO visits(dog_id, date) VALUES(4, CURDATE());
 Query OK, 1 row affected (0.20 sec)
 
-MariaDB [z1791755]> INSERT INTO visits(dog_id, date) VALUES(5, CURDATE());
+MariaDB [XXXXXXXX]> INSERT INTO visits(dog_id, date) VALUES(5, CURDATE());
 Query OK, 1 row affected (0.16 sec)
 
-MariaDB [z1791755]> INSERT INTO visits(dog_id, date) VALUES(2, CURDATE());
+MariaDB [XXXXXXXX]> INSERT INTO visits(dog_id, date) VALUES(2, CURDATE());
 Query OK, 1 row affected (0.17 sec)
 
-MariaDB [z1791755]> INSERT INTO visits(dog_id, date) VALUES(3, CURDATE());
+MariaDB [XXXXXXXX]> INSERT INTO visits(dog_id, date) VALUES(3, CURDATE());
 Query OK, 1 row affected (0.08 sec)
 
-MariaDB [z1791755]> INSERT INTO visits(dog_id, date) VALUES(1, CURDATE());
+MariaDB [XXXXXXXX]> INSERT INTO visits(dog_id, date) VALUES(1, CURDATE());
 Query OK, 1 row affected (0.04 sec)
 
-MariaDB [z1791755]> SELECT * FROM visits;
+MariaDB [XXXXXXXX]> SELECT * FROM visits;
 +----------+--------+------------+
 | visit_id | dog_id | date       |
 +----------+--------+------------+
@@ -180,19 +180,19 @@ MariaDB [z1791755]> SELECT * FROM visits;
 +----------+--------+------------+
 8 rows in set (0.00 sec)
 
-MariaDB [z1791755]> ALTER TABLE visits ADD time TIME;
+MariaDB [XXXXXXXX]> ALTER TABLE visits ADD time TIME;
 Query OK, 0 rows affected (1.25 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
-MariaDB [z1791755]> UPDATE visits SET time = '10:10:10 AM' WHERE visit_id = 4;
+MariaDB [XXXXXXXX]> UPDATE visits SET time = '10:10:10 AM' WHERE visit_id = 4;
 Query OK, 1 row affected, 1 warning (0.05 sec)
 Rows matched: 1  Changed: 1  Warnings: 1
 
-MariaDB [z1791755]> UPDATE visits SET time = '11:11:11 AM' WHERE visit_id = 5;
+MariaDB [XXXXXXXX]> UPDATE visits SET time = '11:11:11 AM' WHERE visit_id = 5;
 Query OK, 1 row affected, 1 warning (0.17 sec)
 Rows matched: 1  Changed: 1  Warnings: 1
 
-MariaDB [z1791755]> SELECT * FROM visits;
+MariaDB [XXXXXXXX]> SELECT * FROM visits;
 +----------+--------+------------+----------+
 | visit_id | dog_id | date       | time     |
 +----------+--------+------------+----------+
@@ -207,12 +207,12 @@ MariaDB [z1791755]> SELECT * FROM visits;
 +----------+--------+------------+----------+
 8 rows in set (0.01 sec)
 
-MariaDB [z1791755]> CREATE VIEW dog_visits AS SELECT dog_id, name, COUNT(*)
+MariaDB [XXXXXXXX]> CREATE VIEW dog_visits AS SELECT dog_id, name, COUNT(*)
     -> no_of_visits FROM dogs NATURAL JOIN visits GROUP by dog_id,
     -> name;CREATE VIEW dog_visits AS SELECT dog_id, name, COUNT(*)
 Query OK, 0 rows affected (0.05 sec)
 
-MariaDB [z1791755]> SELECT * FROM dog_visits;
+MariaDB [XXXXXXXX]> SELECT * FROM dog_visits;
 +--------+--------+--------------+
 | dog_id | name   | no_of_visits |
 +--------+--------+--------------+
@@ -224,5 +224,5 @@ MariaDB [z1791755]> SELECT * FROM dog_visits;
 +--------+--------+--------------+
 5 rows in set (0.00 sec)
 
-MariaDB [z1791755]> \t
+MariaDB [XXXXXXXX]> \t
 Outfile disabled.
