@@ -1,0 +1,228 @@
+login as: XXXXXXXX
+XXXXXXXX@turing.cs.niu.edu's password:
+Linux turing 4.9.0-7-amd64 #1 SMP Debian 4.9.110-3+deb9u1 (2018-08-03) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+You have mail.
+Last login: Thu Nov  1 21:08:05 2018 from 10.167.24.182
+
+XXXXXXXX@turing:~$ mysql -u XXXXXXXX -h courses -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 36431
+Server version: 10.1.26-MariaDB-0+deb9u1 Debian 9.1
+
+Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> \T assign6
+Logging to file 'assign6'
+MariaDB [(none)]> SHOW databases;
++--------------------+
+| Database           |
++--------------------+
+| BabyName           |
+| JavaCust07         |
+| JavaCust08         |
+| JavaCust09         |
+| JavaCust10         |
+| JavaCust11         |
+| JavaCust12         |
+| JavaCust13         |
+| JavaCust14         |
+| JavaCust15         |
+| JavaCust16         |
+| JavaCust17         |
+| JavaCust18         |
+| JavaCust19         |
+| JavaCust20         |
+| JavaCust21         |
+| JavaCust22         |
+| JavaCust23         |
+| JavaCust24         |
+| JavaCust25         |
+| JavaCust26         |
+| JavaCust27         |
+| JavaCust28         |
+| JavaCust29         |
+| JavaCust30         |
+| JavaCust31         |
+| JavaCust32         |
+| JavaCust33         |
+| JavaCust34         |
+| JavaCust35         |
+| JavaCust36         |
+| JavaCust37         |
+| JavaCust38         |
+| JavaCust39         |
+| JavaCust40         |
+| JavaCust41         |
+| JavaCust42         |
+| JavaCust43         |
+| JavaCust44         |
+| JavaCust45         |
+| JavaCust46         |
+| JavaCust47         |
+| JavaCust48         |
+| JavaCust49         |
+| JavaCust50         |
+| JavaCust51         |
+| JavaCust52         |
+| JavaCust53         |
+| JavaCust54         |
+| JavaCust55         |
+| JavaCust56         |
+| JavaCust57         |
+| JavaCust58         |
+| JavaCust59         |
+| JavaCust60         |
+| JavaCust61         |
+| JavaCust62         |
+| JavaCust63         |
+| JavaCust64         |
+| JavaCust65         |
+| Premiere           |
+| classicmodels      |
+| henrybooks         |
+| information_schema |
+| test               |
+| XXXXXXXX           |
++--------------------+
+66 rows in set (0.08 sec)
+
+MariaDB [(none)]> USE XXXXXXXX;
+Database changed
+MariaDB [XXXXXXXX]> CREATE TABLE dogs(
+    -> dog_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    -> breed VARCHAR(30),
+    -> name VARCHAR(30)
+    -> );
+Query OK, 0 rows affected (0.89 sec)
+
+MariaDB [XXXXXXXX]> INSERT INTO dogs(breed, name) VALUES('bulldog', 'allen');
+Query OK, 1 row affected (0.12 sec)
+
+MariaDB [XXXXXXXX]> INSERT INTO dogs(breed, name) VALUES('beagle', 'craig');
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [XXXXXXXX]> INSERT INTO dogs(breed, name) VALUES('poodle', 'edna');
+Query OK, 1 row affected (0.14 sec)
+
+MariaDB [XXXXXXXX]> INSERT INTO dogs(breed, name) VALUES('pug', 'lucy');
+Query OK, 1 row affected (0.16 sec)
+
+MariaDB [XXXXXXXX]> INSERT INTO dogs(breed, name) VALUES('chihuahua', 'eugene');
+Query OK, 1 row affected (0.18 sec)
+
+MariaDB [XXXXXXXX]> SELECT * FROM dogs;
++--------+-----------+--------+
+| dog_id | breed     | name   |
++--------+-----------+--------+
+|      1 | bulldog   | allen  |
+|      2 | beagle    | craig  |
+|      3 | poodle    | edna   |
+|      4 | pug       | lucy   |
+|      5 | chihuahua | eugene |
++--------+-----------+--------+
+5 rows in set (0.01 sec)
+
+MariaDB [XXXXXXXX]> CREATE TABLE visits(
+    -> visit_id INT NOT NULL AUTO_INCREMENT,
+    -> dog_id INT,
+    -> date DATE,
+    -> PRIMARY KEY(visit_id),
+    -> FOREIGN KEY(dog_id) REFERENCES dogs(dog_id)
+    -> );
+Query OK, 0 rows affected (0.89 sec)
+
+MariaDB [XXXXXXXX]> INSERT INTO visits(dog_id, date) VALUES(1, CURDATE());
+Query OK, 1 row affected (0.17 sec)
+
+MariaDB [XXXXXXXX]> INSERT INTO visits(dog_id, date) VALUES(2, CURDATE());
+Query OK, 1 row affected (0.30 sec)
+
+MariaDB [XXXXXXXX]> INSERT INTO visits(dog_id, date) VALUES(3, CURDATE());
+Query OK, 1 row affected (0.18 sec)
+
+MariaDB [XXXXXXXX]> INSERT INTO visits(dog_id, date) VALUES(4, CURDATE());
+Query OK, 1 row affected (0.20 sec)
+
+MariaDB [XXXXXXXX]> INSERT INTO visits(dog_id, date) VALUES(5, CURDATE());
+Query OK, 1 row affected (0.16 sec)
+
+MariaDB [XXXXXXXX]> INSERT INTO visits(dog_id, date) VALUES(2, CURDATE());
+Query OK, 1 row affected (0.17 sec)
+
+MariaDB [XXXXXXXX]> INSERT INTO visits(dog_id, date) VALUES(3, CURDATE());
+Query OK, 1 row affected (0.08 sec)
+
+MariaDB [XXXXXXXX]> INSERT INTO visits(dog_id, date) VALUES(1, CURDATE());
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [XXXXXXXX]> SELECT * FROM visits;
++----------+--------+------------+
+| visit_id | dog_id | date       |
++----------+--------+------------+
+|        1 |      1 | 2018-11-01 |
+|        2 |      2 | 2018-11-01 |
+|        3 |      3 | 2018-11-01 |
+|        4 |      4 | 2018-11-01 |
+|        5 |      5 | 2018-11-01 |
+|        6 |      2 | 2018-11-01 |
+|        7 |      3 | 2018-11-01 |
+|        8 |      1 | 2018-11-01 |
++----------+--------+------------+
+8 rows in set (0.00 sec)
+
+MariaDB [XXXXXXXX]> ALTER TABLE visits ADD time TIME;
+Query OK, 0 rows affected (1.25 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [XXXXXXXX]> UPDATE visits SET time = '10:10:10 AM' WHERE visit_id = 4;
+Query OK, 1 row affected, 1 warning (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 1
+
+MariaDB [XXXXXXXX]> UPDATE visits SET time = '11:11:11 AM' WHERE visit_id = 5;
+Query OK, 1 row affected, 1 warning (0.17 sec)
+Rows matched: 1  Changed: 1  Warnings: 1
+
+MariaDB [XXXXXXXX]> SELECT * FROM visits;
++----------+--------+------------+----------+
+| visit_id | dog_id | date       | time     |
++----------+--------+------------+----------+
+|        1 |      1 | 2018-11-01 | NULL     |
+|        2 |      2 | 2018-11-01 | NULL     |
+|        3 |      3 | 2018-11-01 | NULL     |
+|        4 |      4 | 2018-11-01 | 10:10:10 |
+|        5 |      5 | 2018-11-01 | 11:11:11 |
+|        6 |      2 | 2018-11-01 | NULL     |
+|        7 |      3 | 2018-11-01 | NULL     |
+|        8 |      1 | 2018-11-01 | NULL     |
++----------+--------+------------+----------+
+8 rows in set (0.01 sec)
+
+MariaDB [XXXXXXXX]> CREATE VIEW dog_visits AS SELECT dog_id, name, COUNT(*)
+    -> no_of_visits FROM dogs NATURAL JOIN visits GROUP by dog_id,
+    -> name;CREATE VIEW dog_visits AS SELECT dog_id, name, COUNT(*)
+Query OK, 0 rows affected (0.05 sec)
+
+MariaDB [XXXXXXXX]> SELECT * FROM dog_visits;
++--------+--------+--------------+
+| dog_id | name   | no_of_visits |
++--------+--------+--------------+
+|      1 | allen  |            2 |
+|      2 | craig  |            2 |
+|      3 | edna   |            2 |
+|      4 | lucy   |            1 |
+|      5 | eugene |            1 |
++--------+--------+--------------+
+5 rows in set (0.00 sec)
+
+MariaDB [XXXXXXXX]> \t
+Outfile disabled.
